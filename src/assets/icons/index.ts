@@ -1,0 +1,16 @@
+export { default as PhoneIcon } from './phone.svg';
+export { default as ContactUsIcon } from './contact-us.svg';
+export { default as LocationIcon } from './location.svg';
+export { default as HelpCenterIcon } from './help-center.svg';
+export { default as AngleRightIcon } from './angel-right.svg';
+export { default as FacebookIcon } from './facebook.svg';
+export { default as TwitterIcon } from './twitter.svg';
+export { default as InstagramIcon } from './instagram.svg';
+export { default as LinkedinIcon } from './linkedin.svg';
+export { default as YoutubeIcon } from './youtube.svg';
+export { default as AppleIcon } from './apple.svg';
+export { default as HuaweiIcon } from './huawei.svg';
+export { default as AndroidIcon } from './android.svg';
+export { default as ApplyNowIcon } from './apply-now.svg';
+export { default as CalculatorIcon } from './calculator.svg';
+export { default as FileSearchIcon } from './file-search.svg';

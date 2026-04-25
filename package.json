@@ -1,0 +1,44 @@
+{
+  "name": "example-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "start-docker-cmd" : "npx cpy-cli $npm_config_src . --rename=.env && next build && rimraf .env && next start -p 3000 -H 0.0.0.0",
+    "start-docker-dev": "npm run start-docker-cmd --src=.env.development",
+    "start-docker-test": "npm run start-docker-cmd --src=.env.test",
+    "clean-install": "yarn install --force --cache-clean --network-timeout 99999999"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@reduxjs/toolkit": "^2.1.0",
+    "axios": "^1.10.0",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-redux": "^9.2.0"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "cpy-cli": "^5.0.0",
+    "@types/react-dom": "^18",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.29",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.0",
+    "next-intl": "^4.3.4",
+    "prettier": "^3.6.1",
+    "typescript": "^5.8.3"
+  },
+  "resolutions": {
+    "@babel/traverse": "^7.23.9"
+  }
+}

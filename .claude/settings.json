@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(yarn dev *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/tr)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Read(//private/tmp/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/tr)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/tr/hizmetler)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/tr/fiyatlar)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/tr/hakkimizda)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/tr/iletisim)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/tr/blog)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/tr/teklif-al)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/en)"
+    ],
+    "additionalDirectories": [
+      "/Users/ahmetozgurdarendeli/Desktop/work/nextjsApp/src/app/[locale]"
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+.page {
+  padding-top: 72px;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.blob1 { position: absolute; top: 0; left: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%); pointer-events: none; }
+.blob2 { position: absolute; bottom: 0; right: -200px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%); pointer-events: none; }
+
+.header { position: relative; z-index: 1; text-align: center; padding: 60px 0 48px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.title { font-size: clamp(2rem,4vw,3rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.1; background: linear-gradient(135deg,#f1f5f9,#94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sub { font-size: 1rem; color: #94a3b8; max-width: 440px; line-height: 1.7; }
+
+/* Steps */
+.steps { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 40px; position: relative; z-index: 1; }
+.stepWrap { display: flex; align-items: center; gap: 12px; }
+.stepDot { width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(99,102,241,0.2); background: var(--bg-card); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; color: #64748b; transition: all 0.3s; flex-shrink: 0; }
+.stepActive { border-color: #6366f1 !important; background: rgba(99,102,241,0.15) !important; color: #818cf8 !important; }
+.stepLabel { font-size: 0.8rem; font-weight: 600; color: #64748b; white-space: nowrap; transition: color 0.3s; }
+.stepLabelActive { color: #94a3b8; }
+.stepLine { width: 60px; height: 1px; background: rgba(99,102,241,0.12); margin: 0 8px; transition: background 0.3s; }
+.stepLineActive { background: rgba(99,102,241,0.4); }
+
+/* Card */
+.card { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; background: var(--bg-card); border: 1px solid rgba(99,102,241,0.1); border-radius: 20px; padding: 40px; }
+
+.stepContent { display: flex; flex-direction: column; gap: 16px; }
+.stepTitle { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; }
+
+/* Service grid */
+.serviceGrid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+.serviceBtn { padding: 12px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(99,102,241,0.1); background: rgba(255,255,255,0.02); color: #64748b; cursor: pointer; transition: all 0.2s; font-family: inherit; text-align: center; }
+.serviceBtn:hover { border-color: rgba(99,102,241,0.25); color: #94a3b8; }
+.serviceBtnActive { border-color: rgba(99,102,241,0.5) !important; background: rgba(99,102,241,0.1) !important; color: #818cf8 !important; }
+
+/* Radio */
+.radioGroup { display: flex; flex-direction: column; gap: 8px; }
+.radioLabel { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(99,102,241,0.1); background: rgba(255,255,255,0.02); color: #64748b; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+.radioLabel:hover { border-color: rgba(99,102,241,0.2); color: #94a3b8; }
+.radioActive { border-color: rgba(99,102,241,0.4) !important; background: rgba(99,102,241,0.08) !important; color: #94a3b8 !important; }
+.radioInput { accent-color: #6366f1; width: 16px; height: 16px; flex-shrink: 0; }
+
+/* Textarea */
+.textarea { background: rgba(255,255,255,0.03); border: 1px solid rgba(99,102,241,0.12); border-radius: 10px; padding: 14px 16px; color: #f1f5f9; font-size: 0.9rem; font-family: inherit; width: 100%; resize: vertical; outline: none; transition: border-color 0.2s; }
+.textarea::placeholder { color: #475569; }
+.textarea:focus { border-color: rgba(99,102,241,0.4); }
+
+/* Form */
+.formGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.formGroup { display: flex; flex-direction: column; gap: 8px; }
+.label { font-size: 0.78rem; font-weight: 600; color: #64748b; letter-spacing: 0.4px; }
+.input { background: rgba(255,255,255,0.03); border: 1px solid rgba(99,102,241,0.12); border-radius: 10px; padding: 12px 16px; color: #f1f5f9; font-size: 0.9rem; font-family: inherit; width: 100%; outline: none; transition: border-color 0.2s; }
+.input::placeholder { color: #475569; }
+.input:focus { border-color: rgba(99,102,241,0.4); }
+
+/* Button row */
+.btnRow { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+
+/* Success */
+.successWrap { min-height: calc(100vh - 72px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; }
+.successIcon { font-size: 4rem; }
+.successTitle { font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 900; letter-spacing: -0.03em; background: linear-gradient(135deg,#6366f1,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.successMsg { font-size: 1.05rem; color: #64748b; max-width: 380px; }
+
+@media (max-width: 640px) {
+  .card { padding: 24px; }
+  .serviceGrid { grid-template-columns: repeat(2,1fr); }
+  .formGrid { grid-template-columns: 1fr; }
+  .steps { gap: 0; }
+  .stepLine { width: 32px; }
+  .stepLabel { display: none; }
+}

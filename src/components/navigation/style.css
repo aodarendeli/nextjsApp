@@ -1,0 +1,26 @@
+.notfound_container {
+  text-align: center;
+}
+
+.notfound_container h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #25477b;
+  font-weight: 400;
+}
+
+.notfound_container h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.notfound_container .notfound_link {
+  background-color: #25477b;
+  padding: 10px;
+  border-radius: 10px;
+}
+.notfound_container .notfound_link a {
+  color: white;
+  text-decoration: none;
+}

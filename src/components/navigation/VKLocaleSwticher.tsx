@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { useParams } from 'next/navigation';
 import { Locale } from 'next-intl';
 import { ChangeEvent, ReactNode, useTransition } from 'react';

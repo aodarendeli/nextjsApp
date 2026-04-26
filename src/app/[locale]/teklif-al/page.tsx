@@ -21,6 +21,7 @@ export default function QuotePage() {
   const [loading, setLoading]   = useState(false);
 
   const submit = async () => {
+    console.log('[FreeStudio] Quote form submitted:', { service, budget, timeline, details, contact });
     setLoading(true);
     await new Promise((r) => setTimeout(r, 1400));
     setLoading(false);

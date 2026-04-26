@@ -17,6 +17,7 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('[FreeStudio] Contact form submitted:', form);
     setLoading(true);
     await new Promise((r) => setTimeout(r, 1200));
     setLoading(false);

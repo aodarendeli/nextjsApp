@@ -87,6 +87,9 @@ export default function Header() {
               ))}
             </div>
 
+            {/* Theme toggle */}
+            <ThemeToggle />
+
             {/* CTA */}
             <Link href="/teklif-al" className={styles.ctaBtn}>
               {t('get_quote')}

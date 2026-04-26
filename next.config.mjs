@@ -8,6 +8,12 @@ const withNextIntl = createNextIntlPlugin({
 });
 
 const nextConfig = {
+  compress: true,
+  swcMinify: true,
+  productionBrowserSourceMaps: false,
+  experimental: {
+    optimizePackageImports: ['@mui/material'],
+  },
   webpack(config, options) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -16,18 +22,6 @@ const nextConfig = {
     });
     return config;
   },
-  // rewrites() {
-  //   return [
-  //     {
-  //       source: '/gatewayoauth/:path*',
-  //       destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/oauth/:path*`,
-  //     },
-  //     {
-  //       source: '/collectapplication/:path*',
-  //       destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/collect.application/v1/api/:path*`,
-  //     },
-  //   ];
-  // },
 };
 
 export default withNextIntl(nextConfig);

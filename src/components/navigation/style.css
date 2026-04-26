@@ -1,26 +1,113 @@
 .notfound_container {
+  position: relative;
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  overflow: hidden;
+}
+
+.notfound_blob1 {
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+  pointer-events: none;
+  animation: blob 12s ease-in-out infinite;
+}
+
+.notfound_blob2 {
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  animation: blob 14s ease-in-out infinite reverse;
+}
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -50px) scale(1.1); }
+  66% { transform: translate(-30px, 30px) scale(0.9); }
+}
+
+.notfound_inner {
+  position: relative;
+  z-index: 1;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 600px;
 }
 
-.notfound_container h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #25477b;
-  font-weight: 400;
+.notfound_code {
+  font-size: clamp(5rem, 15vw, 10rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin: 0;
 }
 
-.notfound_container h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  font-weight: 400;
+.notfound_title {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.2;
 }
 
-.notfound_container .notfound_link {
+.notfound_sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+  max-width: 480px;
+}
+
+.notfound_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--gradient-brand);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.notfound_btn:hover {
+  opacity: 0.9;
+  box-shadow: 0 6px 30px rgba(99, 102, 241, 0.5);
+  transform: translateY(-2px);
+}
+
+.notfound_link {
   background-color: #25477b;
   padding: 10px;
   border-radius: 10px;
 }
-.notfound_container .notfound_link a {
+
+.notfound_link a {
   color: white;
   text-decoration: none;
 }

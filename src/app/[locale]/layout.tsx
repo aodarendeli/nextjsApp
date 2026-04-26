@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import VKProvider from '@/providers/VKProvider';
+import ThemeProvider from '@/providers/ThemeProvider';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import '../globals.css';
@@ -36,13 +37,18 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages({ locale });
 
   return (
-    <html className="h-full" lang={locale}>
+    <html className="h-full" lang={locale} data-theme="dark">
+      <head>
+        <script suppressHydrationWarning dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('fs-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}` }} />
+      </head>
       <body className={`${inter.className} flex h-full flex-col`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <VKProvider>
-            <Header />
-            <main className="flex-grow">{children}</main>
-            <Footer />
+            <ThemeProvider>
+              <Header />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </ThemeProvider>
           </VKProvider>
         </NextIntlClientProvider>
       </body>

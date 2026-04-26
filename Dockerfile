@@ -18,7 +18,7 @@ COPY . .
 ARG ENV_FILE=.env.development
 COPY ${ENV_FILE} .env
 
-RUN yarn build
+RUN mkdir -p public && yarn build
 
 FROM base AS runner
 WORKDIR /app

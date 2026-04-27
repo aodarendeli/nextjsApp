@@ -1,6 +1,6 @@
 services:
   freestudio-next:
-    image: ghcr.io/aodarendeli/nextjsApp:latest
+    image: ghcr.io/aodarendeli/nextjsapp:latest
     container_name: freestudio-next
     restart: unless-stopped
     ports:

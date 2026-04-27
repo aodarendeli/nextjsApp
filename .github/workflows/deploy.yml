@@ -90,7 +90,10 @@ jobs:
 
             docker compose -f docker-compose.yml pull
 
-            docker compose -f docker-compose.yml down
+            docker compose -f docker-compose.yml down --remove-orphans
+
+            # Ek güvenlik: eski container'ı force remove et
+            docker container rm -f freestudio-next || true
 
             docker compose -f docker-compose.yml up -d --no-build
 

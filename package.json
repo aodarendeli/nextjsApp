@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "start-docker-cmd" : "npx cpy-cli $npm_config_src . --rename=.env && next build && rimraf .env && next start -p 3005 -H 0.0.0.0",
+    "start-docker-cmd" : "npx cpy-cli $npm_config_src . --rename=.env && next start -p 3005 -H 0.0.0.0",
     "start-docker-dev": "npm run start-docker-cmd --src=.env.development",
     "clean-install": "yarn install --force --cache-clean --network-timeout 99999999"
   },

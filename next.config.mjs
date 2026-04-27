@@ -8,6 +8,7 @@ const withNextIntl = createNextIntlPlugin({
 });
 
 const nextConfig = {
+  output: 'standalone',
   compress: true,
   swcMinify: true,
   productionBrowserSourceMaps: false,

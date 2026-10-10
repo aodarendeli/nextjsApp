@@ -10,6 +10,8 @@ export async function generateMetadata({ params }: Props) {
 
     return {
         title: `${t('contact')} - ${params.cityName}`,
+        // Any slug renders here, so keep these out of the index until real city pages exist.
+        robots: { index: false, follow: true },
     };
 }
 

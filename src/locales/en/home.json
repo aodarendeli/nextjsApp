@@ -1,6 +1,9 @@
 {
   "hometitle": "FreeStudio — Digital Agency & Software",
   "homedescription": "Web design, mobile apps, digital marketing and automation solutions.",
+  "meta_title": "FreeStudio | Web Design, Mobile App & Social Media Agency",
+  "meta_description": "FreeStudio is a digital agency for website development, iOS & Android mobile apps, social media management, paid ads and SEO. Get a free quote today.",
+  "meta_keywords": "digital agency, web design agency, website development, mobile app development, social media management, SEO agency, Google Ads, Meta ads, Turkey",
   "hero_badge": "Your Digital Transformation Partner",
   "hero_title_1": "Build Your Digital",
   "hero_title_2": "Future Together",
@@ -65,5 +68,12 @@
   "cta_title_2": "Your Project to Life",
   "cta_sub": "Get in touch now for a free consultation.",
   "cta_primary": "Get a Quote",
-  "cta_secondary": "Contact Us"
+  "cta_secondary": "Contact Us",
+  "illu_traffic": "Organic traffic",
+  "illu_rating": "Client satisfaction",
+  "illu_delivered": "Project delivered",
+  "illu_followers": "New followers",
+  "pricing_popular": "Most Popular",
+  "pricing_start": "Get Started",
+  "trust_label": "The digital growth partner for businesses of every size"
 }

@@ -74,7 +74,13 @@ jobs:
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
         with:
+          envs: SMTP_HOST,SMTP_PORT,SMTP_USER,SMTP_PASS
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
@@ -87,6 +93,7 @@ jobs:
             export GITHUB_REPOSITORY=${{ github.repository }}
             export NODE_ENV=production
             export NEXT_TELEMETRY_DISABLED=1
+            export SMTP_HOST="$SMTP_HOST" SMTP_PORT="${SMTP_PORT:-465}" SMTP_USER="$SMTP_USER" SMTP_PASS="$SMTP_PASS"
 
             docker compose -f docker-compose.yml pull
 

@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { locales } from '@/next-intl.config';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/utils/seo';
 import styles from './page.module.css';
 
 export type Locale = (typeof locales)[number];
@@ -10,7 +11,13 @@ type Props = { params: { locale: Locale } };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = params;
   const t = await getTranslations({ locale, namespace: 'services' });
-  return { title: t('title') };
+  return buildPageMetadata({
+    locale,
+    href: '/hizmetler',
+    title: t('meta_title'),
+    description: t('meta_description'),
+    keywords: t('meta_keywords'),
+  });
 }
 
 const CheckIcon = () => (
@@ -79,8 +86,6 @@ export default async function ServicesPage({ params }: Props) {
     <div className={styles.page}>
       {/* Hero */}
       <section className={styles.hero}>
-        <div className={styles.blob1} />
-        <div className={styles.blob2} />
         <div className="container">
           <span className="badge animate-fade-up">{t('hero_badge')}</span>
           <h1 className={`${styles.heroTitle} animate-fade-up delay-1`}>{t('hero_title')}</h1>
@@ -93,16 +98,21 @@ export default async function ServicesPage({ params }: Props) {
         <div className="container">
           <div className={styles.servicesStack}>
             {services.map(({ badge, title, desc, features, color, icon }, idx) => (
-              <div key={title} className={`${styles.svcRow} ${idx % 2 === 1 ? styles.svcRowReverse : ''}`}>
-                <div className={styles.svcVisual}>
-                  <div className={styles.svcIconBig} style={{ background: `${color}15`, borderColor: `${color}25` }}>
-                    <div style={{ color }}>
-                      <BigServiceIcon name={icon} />
-                    </div>
+              <div
+                key={title}
+                id={icon}
+                className={`${styles.svcRow} ${idx % 2 === 1 ? styles.svcRowReverse : ''}`}
+                style={{ '--accent': color } as React.CSSProperties}
+              >
+                <div className={styles.svcVisual} data-reveal={idx % 2 === 1 ? 'right' : 'left'}>
+                  <div className={styles.svcOrbit} />
+                  <div className={styles.svcIconBig}>
+                    <BigServiceIcon name={icon} />
                   </div>
-                  <span className="badge" style={{ alignSelf: 'flex-start', borderColor: `${color}40`, background: `${color}12`, color }}>{badge}</span>
+                  <span className={styles.svcBadge}>{badge}</span>
+                  <span className={styles.svcIndex}>0{idx + 1}</span>
                 </div>
-                <div className={styles.svcInfo}>
+                <div className={styles.svcInfo} data-reveal>
                   <h2 className={styles.svcTitle}>{title}</h2>
                   <p className={styles.svcDesc}>{desc}</p>
                   <ul className={styles.featureList}>
@@ -115,7 +125,7 @@ export default async function ServicesPage({ params }: Props) {
                       </li>
                     ))}
                   </ul>
-                  <Link href="/teklif-al" className="btn btn-primary" style={{ width: 'fit-content' }}>
+                  <Link href="/teklif-al" className={`btn btn-primary ${styles.svcBtn}`}>
                     {t('cta_btn')}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                   </Link>
@@ -127,16 +137,17 @@ export default async function ServicesPage({ params }: Props) {
       </section>
 
       {/* CTA */}
-      <section className={styles.cta}>
-        <div className={styles.ctaBlob} />
+      <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className={styles.ctaInner}>
-            <h2 className={styles.ctaTitle}>{t('cta_title')}</h2>
-            <p className={styles.ctaSub}>{t('cta_sub')}</p>
-            <Link href="/teklif-al" className="btn btn-primary">
+          <div className="cta-band" data-reveal="zoom">
+            <h2>{t('cta_title')}</h2>
+            <p>{t('cta_sub')}</p>
+            <div className="cta-band-actions">
+            <Link href="/teklif-al" className="btn btn-light">
               {t('cta_btn')}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </Link>
+            </div>
           </div>
         </div>
       </section>

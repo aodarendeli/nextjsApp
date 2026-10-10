@@ -8,6 +8,7 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   return {
     title: 'ozgur darendei test',
+    robots: { index: false, follow: false },
   };
 }
 

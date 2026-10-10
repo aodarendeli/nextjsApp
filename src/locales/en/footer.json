@@ -1,5 +1,5 @@
 {
-  "tagline": "Let's build your digital world together.",
+  "tagline": "We grow your business online with websites, mobile apps and social media management.",
   "services_title": "Services",
   "web_dev": "Web Development",
   "mobile_app": "Mobile App",
@@ -15,7 +15,17 @@
   "get_quote": "Get a Quote",
   "contact_title": "Contact",
   "copyright": "© {year} FreeStudio. All rights reserved.",
-  "privacy": "Privacy Policy",
-  "terms": "Terms of Service",
-  "cookie": "Cookie Policy"
+  "cta_title": "Let’s talk about your project",
+  "cta_sub": "Tell us your idea and we’ll send a tailored roadmap and quote within 24 hours.",
+  "cta_btn": "Get a Free Quote",
+  "whatsapp": "WhatsApp",
+  "response": "We usually reply within an hour",
+  "latest_title": "From the blog",
+  "hours_title": "Working Hours",
+  "hours": "Mon–Fri, 09:00–18:00",
+  "location": "Istanbul, Türkiye",
+  "back_to_top": "Back to top",
+  "made_in": "Designed and built in Istanbul",
+  "phone_label": "Call us",
+  "email_label": "Email us"
 }

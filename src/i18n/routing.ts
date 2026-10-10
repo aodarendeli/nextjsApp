@@ -17,6 +17,9 @@ export const routing = defineRouting({
     '/blog': {
       en: '/blog',
     },
+    '/blog/[slug]': {
+      en: '/blog/[slug]',
+    },
     '/iletisim': {
       en: '/contact',
     },

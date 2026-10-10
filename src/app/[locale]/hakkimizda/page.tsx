@@ -2,14 +2,21 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { locales } from '@/next-intl.config';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/utils/seo';
 import styles from './page.module.css';
 
 export type Locale = (typeof locales)[number];
 type Props = { params: { locale: Locale } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'about' });
-  return { title: t('title') };
+  const { locale } = params;
+  const t = await getTranslations({ locale, namespace: 'about' });
+  return buildPageMetadata({
+    locale,
+    href: '/hakkimizda',
+    title: t('meta_title'),
+    description: t('meta_description'),
+  });
 }
 
 export default async function AboutPage({ params }: Props) {
@@ -36,8 +43,6 @@ export default async function AboutPage({ params }: Props) {
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
-        <div className={styles.blob1} />
-        <div className={styles.blob2} />
         <div className="container">
           <div className={styles.heroInner}>
             <span className="badge animate-fade-up">{t('hero_badge')}</span>
@@ -50,9 +55,9 @@ export default async function AboutPage({ params }: Props) {
       <section className="section">
         <div className="container">
           <div className={styles.storyGrid}>
-            <div className={styles.storyVisual}>
+            <div className={styles.storyVisual} data-reveal="left">
               <div className={styles.storyCard}>
-                <div className={styles.storyLogo}>FS</div>
+                <div className={styles.storyLogo}>F</div>
                 <div className={styles.storyCardText}>
                   <span className={styles.storyYear}>2019</span>
                   <span className={styles.storyYearLabel}>Kuruluş Yılı</span>
@@ -67,7 +72,7 @@ export default async function AboutPage({ params }: Props) {
                 ))}
               </div>
             </div>
-            <div className={styles.storyContent}>
+            <div className={styles.storyContent} data-reveal="right">
               <span className="badge">{t('story_badge')}</span>
               <h2 className={styles.storyTitle}>{t('story_title')}</h2>
               <p className={styles.storyP}>{t('story_p1')}</p>
@@ -80,13 +85,13 @@ export default async function AboutPage({ params }: Props) {
 
       <section className={`section ${styles.valuesSec}`}>
         <div className="container">
-          <div className={styles.sectionHead}>
+          <div className="section-head" data-reveal>
             <span className="badge">{t('values_badge')}</span>
             <h2 className="section-heading">{t('values_title')}</h2>
           </div>
           <div className={styles.valuesGrid}>
-            {values.map(({ title, desc, icon }) => (
-              <div key={title} className={`${styles.valCard} card`}>
+            {values.map(({ title, desc, icon }, i) => (
+              <div key={title} className={`${styles.valCard} card`} style={{ '--d': i % 3 } as React.CSSProperties} data-reveal>
                 <div className={styles.valIcon}>{icon}</div>
                 <h3 className={styles.valTitle}>{title}</h3>
                 <p className={styles.valDesc}>{desc}</p>
@@ -98,15 +103,15 @@ export default async function AboutPage({ params }: Props) {
 
       <section className="section">
         <div className="container">
-          <div className={styles.sectionHead}>
+          <div className="section-head" data-reveal>
             <span className="badge">{t('team_badge')}</span>
             <h2 className="section-heading">{t('team_title')}</h2>
             <p className="section-sub">{t('team_sub')}</p>
           </div>
           <div className={styles.teamGrid}>
-            {team.map(({ name, role, initials, color }) => (
-              <div key={name} className={`${styles.teamCard} card`}>
-                <div className={styles.teamAvatar} style={{ background: `${color}20`, color }}>{initials}</div>
+            {team.map(({ name, role, initials, color }, i) => (
+              <div key={name} className={`${styles.teamCard} card`} style={{ '--accent': color, '--d': i } as React.CSSProperties} data-reveal>
+                <div className={styles.teamAvatar}>{initials}</div>
                 <h3 className={styles.teamName}>{name}</h3>
                 <p className={styles.teamRole}>{role}</p>
               </div>
@@ -115,16 +120,17 @@ export default async function AboutPage({ params }: Props) {
         </div>
       </section>
 
-      <section className={styles.cta}>
-        <div className={styles.ctaBlob} />
+      <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className={styles.ctaInner}>
-            <h2 className={styles.ctaTitle}>{t('cta_title')}</h2>
-            <p className={styles.ctaSub}>{t('cta_sub')}</p>
-            <Link href="/iletisim" className="btn btn-primary">
-              {t('cta_btn')}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </Link>
+          <div className="cta-band" data-reveal="zoom">
+            <h2>{t('cta_title')}</h2>
+            <p>{t('cta_sub')}</p>
+            <div className="cta-band-actions">
+              <Link href="/iletisim" className="btn btn-light">
+                {t('cta_btn')}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

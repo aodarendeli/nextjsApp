@@ -8,7 +8,8 @@ interface Props {
 }
 
 export default function CountUp({ target, duration = 1800 }: Props) {
-  const [display, setDisplay] = useState('0');
+  // Server render shows the real value (crawlers, no-JS); the count-up starts after hydration.
+  const [display, setDisplay] = useState(target);
   const ref  = useRef<HTMLSpanElement>(null);
   const done = useRef(false);
 
@@ -21,6 +22,7 @@ export default function CountUp({ target, duration = 1800 }: Props) {
 
     const [, prefix, numStr, suffix] = match;
     const num = parseInt(numStr, 10);
+    if (!done.current) setDisplay(`${prefix}0${suffix}`);
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && !done.current) {

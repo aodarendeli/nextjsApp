@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useParams, useRouter as useNextRouter } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { Link } from '@/i18n/navigation';
 import styles from './styles.module.css';
-import ThemeToggle from '../ui/ThemeToggle';
 
 const navItems = [
   { key: 'home',     href: '/'          },
@@ -13,6 +13,7 @@ const navItems = [
   { key: 'pricing',  href: '/fiyatlar'  },
   { key: 'about',    href: '/hakkimizda'},
   { key: 'blog',     href: '/blog'      },
+  { key: 'contact',  href: '/iletisim'  },
 ] as const;
 
 export default function Header() {
@@ -20,6 +21,8 @@ export default function Header() {
   const locale  = useLocale();
   const router  = useRouter();
   const pathname = usePathname();
+  const params   = useParams();
+  const nextRouter = useNextRouter();
 
   const [scrolled, setScrolled] = useState(false);
   const [open,     setOpen]     = useState(false);
@@ -40,8 +43,18 @@ export default function Header() {
   }, [open]);
 
   const switchLocale = (next: 'tr' | 'en') => {
-    router.replace(pathname, { locale: next });
+    // Pages publish their translated URL as an hreflang link; this also covers blog posts whose slugs differ per language.
+    const alternate = document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${next === 'tr' ? 'tr-TR' : 'en'}"]`);
+    if (alternate) {
+      const url = new URL(alternate.href);
+      nextRouter.replace(url.pathname + window.location.hash);
+      return;
+    }
+    // @ts-expect-error -- params always match the current pathname
+    router.replace({ pathname, params }, { locale: next });
   };
+
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`));
 
   const headerClass = [styles.header, scrolled ? styles.scrolled : ''].join(' ');
   const burgerClass = [styles.burger,  open    ? styles.open    : ''].join(' ');
@@ -53,7 +66,7 @@ export default function Header() {
         <div className={styles.inner}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <div className={styles.logoIcon}>FS</div>
+            <div className={styles.logoIcon}>F</div>
             <span className={styles.logoText}>
               <span className={styles.logoFree}>Free</span>
               <span className={styles.logoStudio}>Studio</span>
@@ -65,7 +78,7 @@ export default function Header() {
               <Link
                 key={key}
                 href={href}
-                className={`${styles.navLink} ${pathname === href ? styles.active : ''}`}
+                className={`${styles.navLink} ${isActive(href) ? styles.active : ''}`}
               >
                 {t(key)}
               </Link>
@@ -87,9 +100,6 @@ export default function Header() {
               ))}
             </div>
 
-            {/* Theme toggle */}
-            <ThemeToggle />
-
             {/* CTA */}
             <Link href="/teklif-al" className={styles.ctaBtn}>
               {t('get_quote')}
@@ -103,6 +113,7 @@ export default function Header() {
               className={burgerClass}
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? t('menu_close') : t('menu_open')}
+              aria-expanded={open}
             >
               <span />
               <span />
@@ -113,10 +124,16 @@ export default function Header() {
       </header>
 
       {/* Mobile drawer */}
-      <div className={drawerClass}>
-        {navItems.map(({ key, href }) => (
-          <Link key={key} href={href} className={styles.drawerLink}>
+      <div className={drawerClass} aria-hidden={!open}>
+        {navItems.map(({ key, href }, i) => (
+          <Link
+            key={key}
+            href={href}
+            className={`${styles.drawerLink} ${isActive(href) ? styles.drawerLinkActive : ''}`}
+            style={{ transitionDelay: open ? `${80 + i * 50}ms` : '0ms' }}
+          >
             {t(key)}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </Link>
         ))}
 

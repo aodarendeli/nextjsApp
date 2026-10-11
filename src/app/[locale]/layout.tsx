@@ -7,6 +7,7 @@ import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import VKProvider from '@/providers/VKProvider';
 import RevealObserver from '@/components/ui/RevealObserver';
+import FloatingContact from '@/components/ui/FloatingContact';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { ORGANIZATION, SITE_NAME, SITE_URL, SOCIAL_PROFILES } from '@/constants/seo';
@@ -146,6 +147,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <Header />
             <main>{children}</main>
             <Footer />
+            <FloatingContact />
             <RevealObserver />
           </VKProvider>
         </NextIntlClientProvider>

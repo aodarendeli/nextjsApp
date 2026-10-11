@@ -9,5 +9,7 @@
   "menu_open": "Menüyü Aç",
   "menu_close": "Menüyü Kapat",
   "lang_tr": "TR",
-  "lang_en": "EN"
+  "lang_en": "EN",
+  "float_call": "Hemen Ara",
+  "float_whatsapp": "WhatsApp’tan Yaz"
 }

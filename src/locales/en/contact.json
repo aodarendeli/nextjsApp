@@ -21,7 +21,7 @@
   "success_title": "Message Received!",
   "success_msg": "We'll get back to you as soon as possible.",
   "info_title": "Contact Information",
-  "phone": "0533 291 31 96",
+  "phone": "0533 291 41 96",
   "email": "info@freestudio.site",
   "address": "Istanbul, Turkey",
   "hours": "Monday–Friday, 09:00–18:00",
@@ -34,10 +34,10 @@
   "hours_card_label": "Working Hours",
   "err_required": "This field is required.",
   "err_email_invalid": "Enter a valid email address (e.g. example@email.com).",
-  "err_phone_invalid": "Enter a valid phone number (e.g. 0533 291 31 96).",
+  "err_phone_invalid": "Enter a valid phone number (e.g. 0533 291 41 96).",
   "err_name_short": "Name must be at least 2 characters.",
   "err_message_short": "Your message must be at least 10 characters.",
   "err_too_long": "This field is too long.",
-  "err_send_failed": "Your message could not be sent. Please try again or call us at +90 533 291 31 96.",
+  "err_send_failed": "Your message could not be sent. Please try again or call us at +90 533 291 41 96.",
   "err_rate_limited": "Too many attempts. Please try again in a few minutes."
 }

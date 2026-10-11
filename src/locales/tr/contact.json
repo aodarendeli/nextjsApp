@@ -21,7 +21,7 @@
   "success_title": "Mesajınız İletildi!",
   "success_msg": "En kısa sürede size dönüş yapacağız.",
   "info_title": "İletişim Bilgileri",
-  "phone": "0533 291 31 96",
+  "phone": "0533 291 41 96",
   "email": "info@freestudio.site",
   "address": "İstanbul, Türkiye",
   "hours": "Pazartesi–Cuma, 09:00–18:00",
@@ -34,10 +34,10 @@
   "hours_card_label": "Çalışma Saatleri",
   "err_required": "Bu alan zorunludur.",
   "err_email_invalid": "Geçerli bir e-posta adresi girin (ör. ornek@email.com).",
-  "err_phone_invalid": "Geçerli bir telefon numarası girin (ör. 0533 291 31 96).",
+  "err_phone_invalid": "Geçerli bir telefon numarası girin (ör. 0533 291 41 96).",
   "err_name_short": "Ad soyad en az 2 karakter olmalı.",
   "err_message_short": "Mesajınız en az 10 karakter olmalı.",
   "err_too_long": "Bu alan çok uzun.",
-  "err_send_failed": "Mesaj gönderilemedi. Lütfen tekrar deneyin veya bize 0533 291 31 96 numarasından ulaşın.",
+  "err_send_failed": "Mesaj gönderilemedi. Lütfen tekrar deneyin veya bize 0533 291 41 96 numarasından ulaşın.",
   "err_rate_limited": "Çok fazla deneme yaptınız. Lütfen birkaç dakika sonra tekrar deneyin."
 }

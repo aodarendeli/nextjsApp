@@ -1,0 +1,83 @@
+.fab {
+  position: fixed;
+  bottom: 24px;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  height: 58px;
+  border-radius: var(--radius-full);
+  color: #fff;
+  overflow: hidden;
+  animation: fabIn 600ms var(--ease-out) 800ms both;
+  transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+}
+.fab::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  animation: wave 2.6s ease-out 1.6s infinite;
+  pointer-events: none;
+}
+.fab:hover { transform: translateY(-3px); }
+
+.icon {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  max-width: 0;
+  opacity: 0;
+  white-space: nowrap;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: max-width 400ms var(--ease-out), opacity 250ms ease, padding 400ms var(--ease-out);
+}
+.fab:hover .label,
+.fab:focus-visible .label { max-width: 200px; opacity: 1; }
+
+.call {
+  left: 24px;
+  background: var(--gradient-brand);
+  box-shadow: 0 12px 28px -8px rgba(91, 91, 240, 0.65);
+}
+.call::after { --wave: rgba(91, 91, 240, 0.55); }
+.call:hover { box-shadow: 0 16px 34px -8px rgba(91, 91, 240, 0.8); }
+.call:hover .label { padding-right: 22px; }
+.call .icon svg { animation: ring 3.2s ease-in-out 2s infinite; }
+
+.whatsapp {
+  right: 24px;
+  background: #25d366;
+  box-shadow: 0 12px 28px -8px rgba(37, 211, 102, 0.75);
+}
+.whatsapp::after { --wave: rgba(37, 211, 102, 0.55); }
+.whatsapp:hover { background: #1ebe5b; box-shadow: 0 16px 34px -8px rgba(37, 211, 102, 0.9); }
+.whatsapp:hover .label { padding-left: 22px; }
+
+@keyframes fabIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.8); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes wave {
+  0% { box-shadow: 0 0 0 0 var(--wave); }
+  70%, 100% { box-shadow: 0 0 0 16px transparent; }
+}
+@keyframes ring {
+  0%, 82%, 100% { transform: rotate(0); }
+  84%, 88%, 92% { transform: rotate(-14deg); }
+  86%, 90%, 94% { transform: rotate(14deg); }
+}
+
+@media (max-width: 640px) {
+  .fab { bottom: 16px; height: 54px; }
+  .icon { width: 54px; height: 54px; }
+  .call { left: 16px; }
+  .whatsapp { right: 16px; }
+  .fab:hover .label { max-width: 0; opacity: 0; padding: 0; }
+}

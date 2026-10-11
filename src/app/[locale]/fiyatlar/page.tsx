@@ -2,14 +2,22 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { locales } from '@/next-intl.config';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/utils/seo';
 import styles from './page.module.css';
 
 export type Locale = (typeof locales)[number];
 type Props = { params: { locale: Locale } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'pricing' });
-  return { title: t('title') };
+  const { locale } = params;
+  const t = await getTranslations({ locale, namespace: 'pricing' });
+  return buildPageMetadata({
+    locale,
+    href: '/fiyatlar',
+    title: t('meta_title'),
+    description: t('meta_description'),
+    keywords: t('meta_keywords'),
+  });
 }
 
 const Check = () => (
@@ -90,7 +98,6 @@ export default async function PricingPage({ params }: Props) {
     <div className={styles.page}>
       {/* Hero */}
       <section className={styles.hero}>
-        <div className={styles.blob1} />
         <div className="container">
           <span className="badge animate-fade-up">{t('hero_badge')}</span>
           <h1 className={`${styles.heroTitle} animate-fade-up delay-1`}>
@@ -103,10 +110,10 @@ export default async function PricingPage({ params }: Props) {
       {/* Web plans */}
       <section className="section">
         <div className="container">
-          <h2 className={styles.sectionTitle}>{t('web_section')}</h2>
+          <h2 className={styles.sectionTitle} data-reveal>{t('web_section')}</h2>
           <div className={styles.plansGrid}>
-            {webPlans.map(({ badge, title, price, desc, delivery, features, popular, cta, href }) => (
-              <div key={title} className={`${styles.planCard} ${popular ? styles.planCardPopular : ''}`}>
+            {webPlans.map(({ badge, title, price, desc, delivery, features, popular, cta, href }, i) => (
+              <div key={title} className={`${styles.planCard} ${popular ? styles.planCardPopular : ''}`} style={{ '--d': i } as React.CSSProperties} data-reveal>
                 {popular && <div className={styles.popularTag}>{t('popular')}</div>}
                 <div className={styles.planBadge}>{badge}</div>
                 <h3 className={styles.planTitle}>{title}</h3>
@@ -136,10 +143,10 @@ export default async function PricingPage({ params }: Props) {
       {/* Social media plans */}
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          <h2 className={styles.sectionTitle}>{t('social_section')}</h2>
+          <h2 className={styles.sectionTitle} data-reveal>{t('social_section')}</h2>
           <div className={styles.plansGrid}>
-            {socialPlans.map(({ badge, title, price, period, features, popular }) => (
-              <div key={title} className={`${styles.planCard} ${popular ? styles.planCardPopular : ''}`}>
+            {socialPlans.map(({ badge, title, price, period, features, popular }, i) => (
+              <div key={title} className={`${styles.planCard} ${popular ? styles.planCardPopular : ''}`} style={{ '--d': i } as React.CSSProperties} data-reveal>
                 {popular && <div className={styles.popularTag}>{t('popular')}</div>}
                 <div className={styles.planBadge}>{badge}</div>
                 <h3 className={styles.planTitle}>{title}</h3>
@@ -147,7 +154,7 @@ export default async function PricingPage({ params }: Props) {
                   {price}
                   {period && <span className={styles.planPeriod}>{period}</span>}
                 </div>
-                <ul className={styles.featureList} style={{ marginTop: '16px' }}>
+                <ul className={styles.featureList}>
                   {features.map((f) => (
                     <li key={f} className={styles.featureItem}>
                       <span className={styles.check}><Check /></span>
@@ -172,7 +179,7 @@ export default async function PricingPage({ params }: Props) {
               { emoji: '📱', label: t('mobile_section'), note: t('mobile_start'), color: '#8b5cf6' },
               { emoji: '⚙️', label: 'Otomasyon', note: t('auto_start'), color: '#10b981' },
             ].map(({ emoji, label, note, color }) => (
-              <div key={label} className={styles.mobileCard}>
+              <div key={label} className={styles.mobileCard} data-reveal>
                 <div className={styles.mobileEmoji}>{emoji}</div>
                 <div>
                   <h3 className={styles.mobileTitle}>{label}</h3>
@@ -189,16 +196,17 @@ export default async function PricingPage({ params }: Props) {
       </section>
 
       {/* CTA */}
-      <section className={styles.cta}>
-        <div className={styles.ctaBlob} />
+      <section className="section">
         <div className="container">
-          <div className={styles.ctaInner}>
-            <h2 className={styles.ctaTitle}>{t('cta_title')}</h2>
-            <p className={styles.ctaSub}>{t('cta_sub')}</p>
-            <Link href="/iletisim" className="btn btn-primary">
-              {t('cta_btn')}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </Link>
+          <div className="cta-band" data-reveal="zoom">
+            <h2>{t('cta_title')}</h2>
+            <p>{t('cta_sub')}</p>
+            <div className="cta-band-actions">
+              <Link href="/iletisim" className="btn btn-light">
+                {t('cta_btn')}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

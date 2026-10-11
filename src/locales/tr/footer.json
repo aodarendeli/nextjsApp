@@ -1,5 +1,5 @@
 {
-  "tagline": "Dijital dünyanızı birlikte inşa edelim.",
+  "tagline": "Web sitesi, mobil uygulama ve sosyal medya yönetimiyle işletmenizi dijitalde büyütüyoruz.",
   "services_title": "Hizmetler",
   "web_dev": "Web Geliştirme",
   "mobile_app": "Mobil Uygulama",
@@ -15,7 +15,17 @@
   "get_quote": "Teklif Al",
   "contact_title": "İletişim",
   "copyright": "© {year} FreeStudio. Tüm hakları saklıdır.",
-  "privacy": "Gizlilik Politikası",
-  "terms": "Kullanım Şartları",
-  "cookie": "Çerez Politikası"
+  "cta_title": "Projenizi konuşalım",
+  "cta_sub": "Fikrinizi anlatın, 24 saat içinde size özel bir yol haritası ve fiyat teklifi gönderelim.",
+  "cta_btn": "Ücretsiz Teklif Al",
+  "whatsapp": "WhatsApp",
+  "response": "Genellikle 1 saat içinde yanıt veriyoruz",
+  "latest_title": "Blogdan",
+  "hours_title": "Çalışma Saatleri",
+  "hours": "Pzt–Cum, 09:00–18:00",
+  "location": "İstanbul, Türkiye",
+  "back_to_top": "Yukarı çık",
+  "made_in": "İstanbul’da tasarlandı ve geliştirildi",
+  "phone_label": "Bizi arayın",
+  "email_label": "E-posta gönderin"
 }

@@ -1,5 +1,7 @@
 {
-  "title": "Teklif Al — Nexus Digital",
+  "title": "Teklif Al — FreeStudio",
+  "meta_title": "Ücretsiz Teklif Al: Web Sitesi, Mobil Uygulama, Sosyal Medya",
+  "meta_description": "Projenizi anlatın, 24 saat içinde web sitesi, mobil uygulama veya sosyal medya yönetimi için size özel ücretsiz fiyat teklifi gönderelim.",
   "hero_badge": "Teklif Al",
   "hero_title": "Projenizi Anlatın",
   "hero_sub": "Formu doldurun, 24 saat içinde size özel fiyat teklifimizi iletelim.",
@@ -33,7 +35,7 @@
   "email_label": "E-posta",
   "email_placeholder": "ornek@email.com",
   "phone_label": "Telefon",
-  "phone_placeholder": "+90 5xx xxx xx xx",
+  "phone_placeholder": "05xx xxx xx xx",
   "company_label": "Şirket Adı (opsiyonel)",
   "company_placeholder": "Şirketinizin adı",
   "next_btn": "Devam Et",
@@ -42,5 +44,19 @@
   "submitting": "Gönderiliyor...",
   "success_title": "Talebiniz Alındı!",
   "success_msg": "24 saat içinde size ulaşacağız. Teşekkürler!",
-  "success_btn": "Ana Sayfaya Dön"
+  "success_btn": "Ana Sayfaya Dön",
+  "err_required": "Bu alan zorunludur.",
+  "err_email_invalid": "Geçerli bir e-posta adresi girin (ör. ornek@email.com).",
+  "err_phone_invalid": "Geçerli bir telefon numarası girin (ör. 0533 291 41 96).",
+  "err_name_short": "Ad soyad en az 2 karakter olmalı.",
+  "err_too_long": "Bu alan çok uzun.",
+  "err_send_failed": "Mesaj gönderilemedi. Lütfen tekrar deneyin veya bize 0533 291 41 96 numarasından ulaşın.",
+  "err_rate_limited": "Çok fazla deneme yaptınız. Lütfen birkaç dakika sonra tekrar deneyin.",
+  "err_select_service": "Devam etmek için ihtiyacınız olan hizmeti seçin.",
+  "err_select_budget": "Lütfen tahmini bütçenizi seçin.",
+  "err_select_timeline": "Lütfen projeniz için bir zaman planı seçin.",
+  "step_counter": "Adım {current} / {total}",
+  "summary_label": "Seçimleriniz",
+  "edit_btn": "Düzenle",
+  "optional": "(isteğe bağlı)"
 }

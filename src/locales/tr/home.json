@@ -1,6 +1,9 @@
 {
   "hometitle": "FreeStudio — Dijital Ajans & Yazılım",
   "homedescription": "Web tasarım, mobil uygulama, dijital pazarlama ve otomasyon çözümleri.",
+  "meta_title": "FreeStudio | Web Tasarım, Mobil Uygulama ve Sosyal Medya Ajansı",
+  "meta_description": "FreeStudio dijital ajans: profesyonel web sitesi yapımı, iOS & Android mobil uygulama geliştirme, sosyal medya yönetimi, reklam ve SEO. Ücretsiz teklif alın.",
+  "meta_keywords": "dijital ajans, web tasarım, web sitesi yapımı, kurumsal web sitesi, e-ticaret sitesi, mobil uygulama geliştirme, sosyal medya yönetimi, sosyal medya ajansı, SEO, Google Ads, Meta reklam",
   "hero_badge": "Dijital Dönüşüm Ortağınız",
   "hero_title_1": "Dijital Geleceğinizi",
   "hero_title_2": "Birlikte İnşa Edelim",
@@ -65,5 +68,12 @@
   "cta_title_2": "Hayata Geçirelim",
   "cta_sub": "Ücretsiz danışmanlık görüşmesi için hemen iletişime geçin.",
   "cta_primary": "Teklif Al",
-  "cta_secondary": "İletişime Geç"
+  "cta_secondary": "İletişime Geç",
+  "illu_traffic": "Organik trafik",
+  "illu_rating": "Müşteri memnuniyeti",
+  "illu_delivered": "Proje teslim edildi",
+  "illu_followers": "Yeni takipçi",
+  "pricing_popular": "En Popüler",
+  "pricing_start": "Hemen Başla",
+  "trust_label": "Her ölçekten işletmenin dijital büyüme ortağı"
 }

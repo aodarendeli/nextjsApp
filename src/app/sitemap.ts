@@ -1,80 +1,43 @@
 import { MetadataRoute } from 'next';
+import { routing } from '@/i18n/routing';
+import { absoluteUrl, languageAlternates, postUrl, type AppPathname } from '@/utils/seo';
+import { getPosts, getSlug } from '@/content/blog';
 
-type SitemapItem = {
-  url: string;
-  lastModified: string;
-  changeFrequency: MetadataRoute.Sitemap[0]['changeFrequency'];
-  priority: number;
-  translations: Record<string, string>;
-};
-
-//TODO OZGUR DARENDELİ BURASI BACKENDDEN GELİCEK.
-const sitemapItems: SitemapItem[] = [
-  {
-    url: '/',
-    translations: {
-      en: '/en',
-      tr: '/tr',
-    },
-    lastModified: '2024-12-15T10:00:00Z',
-    changeFrequency: 'yearly',
-    priority: 1,
-  },
-  {
-    url: '/about',
-    translations: {
-      en: '/en/about',
-      tr: '/tr/hakkimizda',
-    },
-    lastModified: '2024-12-15T10:00:00Z',
-    changeFrequency: 'yearly',
-    priority: 0.8,
-  },
-  {
-    url: '/contact',
-    translations: {
-      en: '/en/contact',
-      tr: '/tr/iletisim',
-    },
-    lastModified: '2024-12-15T10:00:00Z',
-    changeFrequency: 'yearly',
-    priority: 0.8,
-  },
-  {
-    url: '/blog/blogen1',
-    translations: {
-      en: '/en/blog/blogen1',
-      tr: '/tr/blog/blogtr1',
-    },
-    lastModified: '2025-07-06T12:00:00Z',
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  },
-  {
-    url: '/blog/blogen2',
-    translations: {
-      en: '/en/blog/blogen2',
-      tr: '/tr/blog/blogtr2',
-    },
-    lastModified: '2025-06-25T15:30:00Z',
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  },
+const PAGES: { href: AppPathname; priority: number; changeFrequency: MetadataRoute.Sitemap[0]['changeFrequency'] }[] = [
+  { href: '/', priority: 1, changeFrequency: 'weekly' },
+  { href: '/hizmetler', priority: 0.9, changeFrequency: 'monthly' },
+  { href: '/fiyatlar', priority: 0.8, changeFrequency: 'monthly' },
+  { href: '/teklif-al', priority: 0.8, changeFrequency: 'yearly' },
+  { href: '/hakkimizda', priority: 0.7, changeFrequency: 'yearly' },
+  { href: '/iletisim', priority: 0.7, changeFrequency: 'yearly' },
+  { href: '/blog', priority: 0.6, changeFrequency: 'weekly' },
 ];
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
 
-  const entries = sitemapItems.flatMap(
-    ({ lastModified, changeFrequency, priority, translations }) => {
-      return Object.values(translations).map((path) => ({
-        url: baseUrl + path,
-        lastModified: new Date(lastModified),
-        changeFrequency,
-        priority,
-      }));
-    }
+  const pages = PAGES.flatMap(({ href, priority, changeFrequency }) =>
+    routing.locales.map((locale) => ({
+      url: absoluteUrl(locale, href),
+      lastModified,
+      changeFrequency,
+      priority: locale === routing.defaultLocale ? priority : Math.round(priority * 0.8 * 10) / 10,
+      alternates: { languages: languageAlternates(href) },
+    }))
   );
 
-  return entries;
+  const posts = getPosts(routing.defaultLocale).flatMap((post) => {
+    const languages: Record<string, string> = {};
+    for (const l of routing.locales) languages[l === 'tr' ? 'tr-TR' : 'en'] = postUrl(l, getSlug(l, post.id));
+    languages['x-default'] = postUrl(routing.defaultLocale, getSlug(routing.defaultLocale, post.id));
+    return routing.locales.map((locale) => ({
+      url: postUrl(locale, getSlug(locale, post.id)),
+      lastModified: new Date(post.updated ?? post.published),
+      changeFrequency: 'monthly' as const,
+      priority: locale === routing.defaultLocale ? 0.7 : 0.6,
+      alternates: { languages },
+    }));
+  });
+
+  return [...pages, ...posts];
 }

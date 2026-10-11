@@ -1,16 +1,17 @@
-import dynamic from 'next/dynamic';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { locales } from '@/next-intl.config';
 import { Link } from '@/i18n/navigation';
 import ServiceIcon from '@/components/ServiceIcon';
+import HeroIllustration from '@/components/HeroIllustration';
 import CountUp from '@/components/ui/CountUp';
 import styles from './home.module.css';
 
-const HeroIllustration = dynamic(() => import('@/components/HeroIllustration'), { ssr: true });
-const ScrollReveal = dynamic(() => import('@/components/ui/ScrollReveal'), { ssr: false });
-
 export type Locale = (typeof locales)[number];
 type Props = { params: { locale: Locale } };
+
+const Arrow = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+);
 
 export default async function IndexPage({ params }: Props) {
   const { locale } = params;
@@ -18,12 +19,17 @@ export default async function IndexPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: 'home' });
 
   const services = [
-    { icon: 'web',    title: t('svc_web_title'),        desc: t('svc_web_desc'),        color: '#6366f1' },
+    { icon: 'web',    title: t('svc_web_title'),        desc: t('svc_web_desc'),        color: '#5b5bf0' },
     { icon: 'mobile', title: t('svc_mobile_title'),     desc: t('svc_mobile_desc'),     color: '#8b5cf6' },
-    { icon: 'ads',    title: t('svc_marketing_title'),  desc: t('svc_marketing_desc'),  color: '#06b6d4' },
     { icon: 'social', title: t('svc_social_title'),     desc: t('svc_social_desc'),     color: '#f59e0b' },
-    { icon: 'auto',   title: t('svc_automation_title'), desc: t('svc_automation_desc'), color: '#10b981' },
+    { icon: 'ads',    title: t('svc_marketing_title'),  desc: t('svc_marketing_desc'),  color: '#06b6d4' },
     { icon: 'seo',    title: t('svc_seo_title'),        desc: t('svc_seo_desc'),        color: '#f43f5e' },
+    { icon: 'auto',   title: t('svc_automation_title'), desc: t('svc_automation_desc'), color: '#10b981' },
+  ];
+
+  const marquee = [
+    t('svc_web_title'), 'Next.js', t('svc_mobile_title'), 'React Native', t('svc_social_title'), 'Instagram',
+    t('svc_marketing_title'), 'Google Ads', 'Meta Ads', t('svc_seo_title'), t('svc_automation_title'), 'n8n',
   ];
 
   const stats = [
@@ -41,9 +47,9 @@ export default async function IndexPage({ params }: Props) {
   ];
 
   const pricing = [
-    { title: t('pricing_web_title'),    price: t('pricing_web_price'),    desc: t('pricing_web_desc'),    popular: false },
-    { title: t('pricing_ecom_title'),   price: t('pricing_ecom_price'),   desc: t('pricing_ecom_desc'),   popular: true  },
-    { title: t('pricing_custom_title'), price: t('pricing_custom_price'), desc: t('pricing_custom_desc'), popular: false },
+    { title: t('pricing_web_title'),    price: t('pricing_web_price'),    desc: t('pricing_web_desc'),    popular: false, custom: false },
+    { title: t('pricing_ecom_title'),   price: t('pricing_ecom_price'),   desc: t('pricing_ecom_desc'),   popular: true,  custom: false },
+    { title: t('pricing_custom_title'), price: t('pricing_custom_price'), desc: t('pricing_custom_desc'), popular: false, custom: true  },
   ];
 
   return (
@@ -51,21 +57,26 @@ export default async function IndexPage({ params }: Props) {
 
       {/* ── Hero ── */}
       <section className={styles.hero}>
-        <div className={styles.heroBlob1} />
-        <div className={styles.heroBlob2} />
+        <div className={`blob ${styles.heroBlob1}`} />
+        <div className={`blob ${styles.heroBlob2}`} />
         <div className={styles.gridOverlay} />
-        <div className="container">
+        <div className={`container ${styles.heroGrid}`}>
           <div className={styles.heroContent}>
-            <span className={`badge animate-fade-up`}>{t('hero_badge')}</span>
+            <span className="badge animate-fade-up">{t('hero_badge')}</span>
             <h1 className={`${styles.heroTitle} animate-fade-up delay-1`}>
-              {t('hero_title_1')}<br />
-              <span className="gradient-text">{t('hero_title_2')}</span>
+              {t('hero_title_1')}{' '}
+              <span className={styles.heroAccent}>
+                <span className="gradient-text">{t('hero_title_2')}</span>
+                <svg className={styles.underline} viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M2 9 C 80 2, 220 2, 298 8" />
+                </svg>
+              </span>
             </h1>
             <p className={`${styles.heroSub} animate-fade-up delay-2`}>{t('hero_sub')}</p>
             <div className={`${styles.heroBtns} animate-fade-up delay-3`}>
               <Link href="/teklif-al" className="btn btn-primary">
                 {t('hero_cta_primary')}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <Arrow />
               </Link>
               <Link href="/hizmetler" className="btn btn-outline">{t('hero_cta_secondary')}</Link>
             </div>
@@ -83,31 +94,63 @@ export default async function IndexPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Hero Illustration */}
-          <div className={`${styles.heroVisual} animate-fade delay-3`}>
-            <HeroIllustration className={styles.heroIllustration} />
+          <div className={styles.heroVisual}>
+            <HeroIllustration
+              labels={{
+                traffic: t('illu_traffic'),
+                rating: t('illu_rating'),
+                delivered: t('illu_delivered'),
+                followers: t('illu_followers'),
+              }}
+            />
           </div>
         </div>
       </section>
 
+      {/* ── Marquee ── */}
+      <section className={styles.marqueeSec} aria-label={t('services_title')}>
+        <p className={styles.marqueeLabel}>{t('trust_label')}</p>
+        <div className="marquee">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="marquee-track" aria-hidden={copy === 1}>
+              {marquee.map((item, i) => (
+                <span key={`${copy}-${i}`} className={styles.marqueeItem}>
+                  <span className={styles.marqueeDot} style={{ background: services[i % services.length].color }} />
+                  {item}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── Services ── */}
-      <section className={`section ${styles.servicesSec}`}>
+      <section className="section">
         <div className="container">
-          <div className={styles.sectionHead}>
+          <div className="section-head" data-reveal>
             <span className="badge">{t('services_badge')}</span>
             <h2 className="section-heading">{t('services_title')}</h2>
             <p className="section-sub">{t('services_sub')}</p>
           </div>
           <div className={styles.servicesGrid}>
-            {services.map(({ icon, title, desc, color }) => (
-              <Link href="/hizmetler" key={title} className={`${styles.svcCard} card`}>
-                <div className={styles.svcIcon} style={{ background: `${color}1a`, color }}>
-                  <ServiceIcon name={icon} />
+            {services.map(({ icon, title, desc, color }, i) => (
+              <Link
+                href="/hizmetler"
+                key={title}
+                className={`${styles.svcCard} card`}
+                style={{ '--accent': color, '--d': i % 3 } as React.CSSProperties}
+                data-reveal
+              >
+                <div className={styles.svcTop}>
+                  <div className={styles.svcIcon}>
+                    <ServiceIcon name={icon} />
+                  </div>
+                  <span className={styles.svcNum}>0{i + 1}</span>
                 </div>
                 <h3 className={styles.svcTitle}>{title}</h3>
                 <p className={styles.svcDesc}>{desc}</p>
-                <span className={styles.svcArrow} style={{ color }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <span className={styles.svcArrow}>
+                  <Arrow />
                 </span>
               </Link>
             ))}
@@ -117,16 +160,17 @@ export default async function IndexPage({ params }: Props) {
 
       {/* ── Stats ── */}
       <section className={styles.statsSec}>
-        <div className={styles.statsBlob} />
         <div className="container">
-          <span className="badge" style={{ marginBottom: '32px', display: 'inline-flex' }}>{t('stats_badge')}</span>
-          <div className={styles.statsGrid}>
-            {stats.map(({ val, label }) => (
-              <div key={label} className={styles.statItem}>
-                <span className={styles.statVal}>{val}</span>
-                <span className={styles.statLabel}>{label}</span>
-              </div>
-            ))}
+          <div className={styles.statsCard} data-reveal="zoom">
+            <span className={`badge ${styles.statsBadge}`}>{t('stats_badge')}</span>
+            <div className={styles.statsGrid}>
+              {stats.map(({ val, label }) => (
+                <div key={label} className={styles.statItem}>
+                  <span className={styles.statVal}><CountUp target={val} /></span>
+                  <span className={styles.statLabel}>{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -134,16 +178,16 @@ export default async function IndexPage({ params }: Props) {
       {/* ── Process ── */}
       <section className="section">
         <div className="container">
-          <div className={styles.sectionHead}>
+          <div className="section-head" data-reveal>
             <span className="badge">{t('process_badge')}</span>
             <h2 className="section-heading">{t('process_title')}</h2>
             <p className="section-sub">{t('process_sub')}</p>
           </div>
           <div className={styles.processGrid}>
+            <div className={styles.processLine} data-reveal />
             {process.map(({ n, title, desc }, i) => (
-              <div key={n} className={styles.processItem}>
+              <div key={n} className={styles.processItem} style={{ '--d': i } as React.CSSProperties} data-reveal>
                 <div className={styles.processNum}>{n}</div>
-                {i < process.length - 1 && <div className={styles.processLine} />}
                 <h3 className={styles.processTitle}>{title}</h3>
                 <p className={styles.processDesc}>{desc}</p>
               </div>
@@ -153,26 +197,30 @@ export default async function IndexPage({ params }: Props) {
       </section>
 
       {/* ── Pricing teaser ── */}
-      <section className={`section ${styles.pricingSec}`}>
+      <section className="section section-alt">
         <div className="container">
-          <div className={styles.sectionHead}>
+          <div className="section-head" data-reveal>
             <span className="badge">{t('pricing_badge')}</span>
             <h2 className="section-heading">{t('pricing_title')}</h2>
             <p className="section-sub">{t('pricing_sub')}</p>
           </div>
           <div className={styles.pricingGrid}>
-            {pricing.map(({ title, price, desc, popular }) => (
-              <div key={title} className={`${styles.pricingCard} card ${popular ? styles.pricingCardPopular : ''}`}>
-                {popular && <div className={styles.popularBadge}>⭐ En Popüler</div>}
+            {pricing.map(({ title, price, desc, popular, custom }, i) => (
+              <div
+                key={title}
+                className={`${styles.pricingCard} ${popular ? styles.pricingCardPopular : ''}`}
+                style={{ '--d': i } as React.CSSProperties}
+                data-reveal
+              >
+                {popular && <div className={styles.popularBadge}>★ {t('pricing_popular')}</div>}
                 <h3 className={styles.pricingTitle}>{title}</h3>
                 <div className={styles.pricingPrice}>{price}</div>
                 <p className={styles.pricingDesc}>{desc}</p>
                 <Link
-                  href={price === t('pricing_custom_price') ? '/teklif-al' : '/fiyatlar'}
-                  className={`btn ${popular ? 'btn-primary' : 'btn-outline'}`}
-                  style={{ width: '100%', justifyContent: 'center' }}
+                  href={custom ? '/teklif-al' : '/fiyatlar'}
+                  className={`btn ${popular ? 'btn-primary' : 'btn-outline'} ${styles.pricingBtn}`}
                 >
-                  {price === t('pricing_custom_price') ? t('pricing_custom_price') : 'Hemen Başla'}
+                  {custom ? t('pricing_custom_price') : t('pricing_start')}
                 </Link>
               </div>
             ))}
@@ -180,29 +228,27 @@ export default async function IndexPage({ params }: Props) {
           <div className={styles.pricingFooter}>
             <Link href="/fiyatlar" className="btn btn-ghost">
               {t('pricing_cta')}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <Arrow />
             </Link>
           </div>
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <section className={styles.ctaSec}>
-        <div className={styles.ctaBlob1} />
-        <div className={styles.ctaBlob2} />
+      <section className="section">
         <div className="container">
-          <div className={styles.ctaInner}>
-            <h2 className={styles.ctaTitle}>
+          <div className="cta-band" data-reveal="zoom">
+            <h2>
               {t('cta_title_1')}{' '}
               <span className="gradient-text">{t('cta_title_2')}</span>
             </h2>
-            <p className={styles.ctaSub}>{t('cta_sub')}</p>
-            <div className={styles.ctaBtns}>
-              <Link href="/teklif-al" className="btn btn-primary">
+            <p>{t('cta_sub')}</p>
+            <div className="cta-band-actions">
+              <Link href="/teklif-al" className="btn btn-light">
                 {t('cta_primary')}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <Arrow />
               </Link>
-              <Link href="/iletisim" className="btn btn-outline">{t('cta_secondary')}</Link>
+              <Link href="/iletisim" className="btn btn-glass">{t('cta_secondary')}</Link>
             </div>
           </div>
         </div>
@@ -211,4 +257,3 @@ export default async function IndexPage({ params }: Props) {
     </div>
   );
 }
-

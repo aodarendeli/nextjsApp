@@ -1,5 +1,7 @@
 {
-  "title": "Get a Quote — Nexus Digital",
+  "title": "Get a Quote — FreeStudio",
+  "meta_title": "Get a Free Quote: Website, Mobile App, Social Media",
+  "meta_description": "Tell us about your project and receive a free, tailored quote for your website, mobile app or social media management within 24 hours.",
   "hero_badge": "Get a Quote",
   "hero_title": "Tell Us About Your Project",
   "hero_sub": "Fill out the form and we'll send you a custom quote within 24 hours.",
@@ -33,7 +35,7 @@
   "email_label": "Email",
   "email_placeholder": "example@email.com",
   "phone_label": "Phone",
-  "phone_placeholder": "+90 5xx xxx xx xx",
+  "phone_placeholder": "05xx xxx xx xx",
   "company_label": "Company Name (optional)",
   "company_placeholder": "Your company name",
   "next_btn": "Continue",
@@ -42,5 +44,19 @@
   "submitting": "Sending...",
   "success_title": "Request Received!",
   "success_msg": "We'll reach out within 24 hours. Thank you!",
-  "success_btn": "Go to Home"
+  "success_btn": "Go to Home",
+  "err_required": "This field is required.",
+  "err_email_invalid": "Enter a valid email address (e.g. example@email.com).",
+  "err_phone_invalid": "Enter a valid phone number (e.g. 0533 291 41 96).",
+  "err_name_short": "Name must be at least 2 characters.",
+  "err_too_long": "This field is too long.",
+  "err_send_failed": "Your message could not be sent. Please try again or call us at +90 533 291 41 96.",
+  "err_rate_limited": "Too many attempts. Please try again in a few minutes.",
+  "err_select_service": "Please choose the service you need to continue.",
+  "err_select_budget": "Please select your estimated budget.",
+  "err_select_timeline": "Please choose a timeline for your project.",
+  "step_counter": "Step {current} of {total}",
+  "summary_label": "Your selections",
+  "edit_btn": "Edit",
+  "optional": "(optional)"
 }
